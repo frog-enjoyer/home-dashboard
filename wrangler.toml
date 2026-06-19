@@ -1,0 +1,29 @@
+name = "command-center"
+compatibility_date = "2026-06-19"
+# SvelteKit's server bundle uses node:async_hooks (AsyncLocalStorage).
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".svelte-kit/cloudflare"
+
+# KV namespace for the dashboard: caches /api responses (stale-while-revalidate)
+# AND stores todos/habits as JSON (no D1 — single-user, decided in eng review).
+# Create it with:
+#   npx wrangler kv namespace create DASH
+# then paste the returned id below.
+[[kv_namespaces]]
+binding = "DASH"
+id = "d2356c7326ea4bafbc4b4814ab0be683"
+
+# Secrets (weather needs none — Open-Meteo is keyless). Add keyed sources with:
+#   npx wrangler pages secret put NEWS_API_KEY
+#   npx wrangler pages secret put FINANCE_API_KEY
+#   npx wrangler pages secret put RTT_TOKEN            # trains (realtimetrains.io)
+#
+# Personalisation — set these as plain environment variables in the Cloudflare
+# Pages dashboard (Settings → Environment variables) so they stay OUT of git.
+# The committed code only ships neutral placeholders.
+#   TRAIN_FROM / TRAIN_TO            CRS station codes (e.g. KGX / YRK)
+#   TRAIN_FROM_NAME / TRAIN_TO_NAME  display names (e.g. King's Cross / York)
+#   FOOTBALL_TEAM_A / FOOTBALL_TEAM_B            TheSportsDB team ids
+#   FOOTBALL_TEAM_A_NAME / FOOTBALL_TEAM_B_NAME  display names
+# The owner name (clock greeting / status bar) is set in-app via Settings and
+# stored in KV — also never committed.

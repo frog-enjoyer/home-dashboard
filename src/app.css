@@ -1,0 +1,74 @@
+/* Tokyo Night design tokens — extracted from the approved wireframe
+   (~/.gstack/projects/Vibe/designs/dashboard-20260619/approved-v2.html).
+   This is the seed of the future DESIGN.md (see TODOS.md). */
+:root {
+  --bg: #16161e;
+  --panel: #1a1b26;
+  --panel-h: #1f2233;
+  --inset: #13131a;
+  --line: #272b3d;
+  --line-2: #33384f;
+
+  --ink: #c0caf5;
+  --dim: #7a82ab;
+  --faint: #565f89;
+
+  --blue: #7aa2f7;
+  --cyan: #7dcfff;
+  --green: #9ece6a;
+  --mag: #bb9af7;
+  --orange: #e0af68;
+  --red: #f7768e;
+  --teal: #73daca;
+
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --gap: 1px;
+  --pad: 11px 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* App shell: top status bar / grid / bottom keybind bar */
+.app { display: flex; flex-direction: column; height: 100vh; }
+
+/* Layout + responsive are handled by GridStack (12-col grid, collapses to 1
+   column under 760px). See src/routes/+page.svelte. */
+
+/* Pane = a terminal window. Fills its GridStack cell. */
+.pane {
+  background: var(--panel); display: flex; flex-direction: column;
+  min-height: 0; overflow: hidden; height: 100%; width: 100%;
+  border: 1px solid var(--line); border-radius: 6px;
+}
+.pane-h {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--panel-h); border-bottom: 1px solid var(--line);
+  padding: 5px 10px; font-size: 10px; flex: none;
+}
+.pane-t { color: var(--dim); }
+.pane-t .pre { color: var(--faint); }
+.pane-t b { color: var(--blue); font-weight: 600; }
+.pane-body { padding: var(--pad); overflow: hidden; display: flex; flex-direction: column; flex: 1; min-height: 0; }
+
+.tag { color: var(--faint); font-size: 10px; }
+.tag.live { color: var(--green); }
+.tag.warn { color: var(--orange); }
+
+/* Focus visibility — even though full a11y was deferred, broken focus on a
+   keyboard-driven UI is worse than none. Cheap to keep. */
+:focus-visible { outline: 1px solid var(--cyan); outline-offset: 1px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; }
+}

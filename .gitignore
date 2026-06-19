@@ -1,0 +1,14 @@
+node_modules
+/.svelte-kit
+/build
+/.wrangler
+.DS_Store
+.env
+.env.*
+!.env.example
+# Cloudflare Wrangler local secrets for dev
+.dev.vars
+# Claude Code local machine config (permissions, etc.)
+.claude/settings.local.json
+# gstack session artifacts that landed in the project dir
+.gstack/
